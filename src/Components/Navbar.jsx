@@ -18,7 +18,7 @@ const Navbar = () => {
             Fairy Birdz
           </a>
           <button
-            className="navbar-toggler"
+            className="navbar-toggler text-white"
             type="button"
             data-bs-toggle="collapse"
             data-bs-target="#navbarNav"
@@ -26,7 +26,7 @@ const Navbar = () => {
             aria-expanded="false"
             aria-label="Toggle navigation"
           >
-            <span className="navbar-toggler-icon" /> |||
+            <span className="navbar-toggler-icon text-center" /> |||
           </button>
 
           <div class="collapse navbar-collapse" id="navbarNav">
