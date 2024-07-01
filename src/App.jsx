@@ -10,7 +10,7 @@ import ManageAuthor from "./Pages/ManageAuthor";
 import EditBooks from "./Pages/EditBooks";
 import EditAuthor from "./Pages/EditAuthor";
 import Story from "./Pages/Story";
-import Chart from "./Pages/Chart"; // Updated import
+import Chart from "./Pages/Chart";
 
 const App = () => {
   return (
@@ -20,7 +20,7 @@ const App = () => {
           <Navbar />
         </div>
         <Routes>
-          <Route path="/" element={<Chart />} /> {/* Updated Route */}
+          <Route path="/" element={<Chart />} />
           <Route path="/home" element={<Home />} />
           <Route path="/books" element={<Books />} />
           <Route path="/author" element={<Author />} />

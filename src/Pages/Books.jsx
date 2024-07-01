@@ -172,7 +172,6 @@ const Book = () => {
           <textarea
             id="biography"
             name="biography"
-            value={`எழுத்தாளரின் பெயர் ${formik.values.author}. இவர் ${formik.values.title} என்னும் இந்த நூலை இயற்றியுள்ளார். இதனை படித்து மகிழுங்கள்`}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             className={
@@ -180,7 +179,6 @@ const Book = () => {
                 ? "form-control is-invalid"
                 : "form-control"
             }
-            readOnly
           />
           {formik.touched.biography && formik.errors.biography ? (
             <div className="invalid-feedback">{formik.errors.biography}</div>
@@ -194,7 +192,6 @@ const Book = () => {
             type="text"
             id="isbn"
             name="isbn"
-            value={formik.values.isbn}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             className={
@@ -202,7 +199,6 @@ const Book = () => {
                 ? "form-control is-invalid"
                 : "form-control"
             }
-            readOnly
           />
           {formik.touched.isbn && formik.errors.isbn ? (
             <div className="invalid-feedback">{formik.errors.isbn}</div>
