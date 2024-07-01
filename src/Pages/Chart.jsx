@@ -25,6 +25,12 @@ const Chart = () => {
     }
   };
 
+  // Function to format publication date
+  const formatDate = (dateString) => {
+    const options = { year: "numeric", month: "short", day: "numeric" };
+    return new Date(dateString).toLocaleDateString("en-US", options);
+  };
+
   const totalBooks = books.length;
   const totalAuthors = authors.length;
 
@@ -68,7 +74,8 @@ const Chart = () => {
                   <strong>ISBN:</strong> {book.isbn}
                 </p>
                 <p className="card-text">
-                  <strong>Publication Date:</strong> {book.publicationDate}
+                  <strong>Publication Date:</strong>{" "}
+                  {formatDate(book.publicationDate)}
                 </p>
                 <p className="card-text text-center">
                   <Link to={`/story/${book.id}`} className="btn btn-success">

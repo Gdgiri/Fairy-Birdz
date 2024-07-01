@@ -19,6 +19,12 @@ const Author = () => {
     }
   };
 
+  // Function to format date of birth
+  const formatDate = (dateString) => {
+    const options = { year: "numeric", month: "short", day: "numeric" };
+    return new Date(dateString).toLocaleDateString("en-US", options);
+  };
+
   return (
     <div className="container mt-4">
       <div className="row row-cols-1 row-cols-md-3 g-4">
@@ -38,7 +44,7 @@ const Author = () => {
                 </h5>
                 <h6 className="card-subtitle mb-2">
                   <strong>Date of Birth: </strong>
-                  {author.authordob}
+                  {formatDate(author.authordob)}
                 </h6>
 
                 <p className="card-text">

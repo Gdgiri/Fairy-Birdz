@@ -21,6 +21,12 @@ const ManageAuthors = () => {
     }
   };
 
+  // Function to format date of birth
+  const formatDateOfBirth = (dateString) => {
+    const options = { year: "numeric", month: "short", day: "numeric" };
+    return new Date(dateString).toLocaleDateString("en-US", options);
+  };
+
   const handleEdit = (id) => {
     navigate(`/editauthor/${id}`);
   };
@@ -54,7 +60,8 @@ const ManageAuthors = () => {
               <div className="card-body">
                 <h5 className="card-title">{author.author}</h5>
                 <p className="card-text">
-                  <strong>Date of Birth:</strong> {author.authordob}
+                  <strong>Date of Birth:</strong>{" "}
+                  {formatDateOfBirth(author.authordob)}
                 </p>
                 <p className="card-text">
                   <strong>Biography:</strong> {author.biography}
