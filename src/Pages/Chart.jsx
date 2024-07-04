@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
 
 const Chart = () => {
-  const [books, setBooks] = useState([]);
-  const [authors, setAuthors] = useState([]);
+  const [totalBooks, setTotalBooks] = useState(0);
+  const [totalAuthors, setTotalAuthors] = useState(0);
+  const [totalViews, setTotalViews] = useState(0);
+  const [totalLikes, setTotalLikes] = useState(0);
+  const [totalDislikes, setTotalDislikes] = useState(0);
 
   useEffect(() => {
     fetchData();
@@ -15,29 +17,37 @@ const Chart = () => {
       const res = await axios.get(
         "https://6681160056c2c76b495d730d.mockapi.io/api/library"
       );
-      setBooks(res.data);
+      const booksData = res.data;
 
-      // Extracting unique authors
-      const uniqueAuthors = [...new Set(res.data.map((book) => book.author))];
-      setAuthors(uniqueAuthors);
+      // Setting total books count
+      setTotalBooks(booksData.length);
+
+      // Extracting unique authors and setting total authors count
+      const uniqueAuthors = [...new Set(booksData.map((book) => book.author))];
+      setTotalAuthors(uniqueAuthors.length);
+
+      // Calculate total views
+      const views = booksData.reduce((sum, book) => sum + (book.views || 0), 0);
+      setTotalViews(views);
+
+      // Calculate total likes and dislikes
+      const likes = booksData.reduce((sum, book) => sum + (book.likes || 0), 0);
+      setTotalLikes(likes);
+
+      const dislikes = booksData.reduce(
+        (sum, book) => sum + (book.dislikes || 0),
+        0
+      );
+      setTotalDislikes(dislikes);
     } catch (error) {
       console.log(error);
     }
   };
 
-  // Function to format publication date
-  const formatDate = (dateString) => {
-    const options = { year: "numeric", month: "short", day: "numeric" };
-    return new Date(dateString).toLocaleDateString("en-US", options);
-  };
-
-  const totalBooks = books.length;
-  const totalAuthors = authors.length;
-
   return (
     <div className="container mt-4 text-center">
-      <div className="row">
-        <div className="col-md-6">
+      <div className="row mb-4">
+        <div className="col-md-4">
           <h2 className="text-center mb-4">Books Upload Count</h2>
           <div className="card text-white bg-danger mb-3">
             <div className="card-body">
@@ -46,7 +56,7 @@ const Chart = () => {
             </div>
           </div>
         </div>
-        <div className="col-md-6">
+        <div className="col-md-4">
           <h2 className="text-center mb-4">Authors Upload Count</h2>
           <div className="card text-white bg-success mb-3">
             <div className="card-body">
@@ -55,37 +65,35 @@ const Chart = () => {
             </div>
           </div>
         </div>
-      </div>
-      <div className="row row-cols-1 row-cols-md-3 g-4 mt-4">
-        {books.map((book) => (
-          <div className="col" key={book.id}>
-            <div className="card h-100">
-              <div className="img-container">
-                <img
-                  src={book.image}
-                  className="card-img-top"
-                  alt={book.title}
-                />
-              </div>
-              <div className="card-body">
-                <h5 className="card-title">{book.title}</h5>
-                <h6 className="card-subtitle mb-2 text-muted">{book.author}</h6>
-                <p className="card-text">
-                  <strong>ISBN:</strong> {book.isbn}
-                </p>
-                <p className="card-text">
-                  <strong>Publication Date:</strong>{" "}
-                  {formatDate(book.publicationDate)}
-                </p>
-                <p className="card-text text-center">
-                  <Link to={`/story/${book.id}`} className="btn btn-success">
-                    Read
-                  </Link>
-                </p>
-              </div>
+        <div className="col-md-4">
+          <h2 className="text-center mb-4">Total Views Count</h2>
+          <div className="card text-white bg-info mb-3">
+            <div className="card-body">
+              <h5 className="card-title">Total Views</h5>
+              <p className="card-text display-1">{totalViews}</p>
             </div>
           </div>
-        ))}
+        </div>
+      </div>
+      <div className="row mb-4">
+        <div className="col-md-6">
+          <h2 className="text-center mb-4">Total Like Count</h2>
+          <div className="card text-white bg-success mb-3">
+            <div className="card-body">
+              <h5 className="card-title">Total Likes</h5>
+              <p className="card-text display-1">{totalLikes}</p>
+            </div>
+          </div>
+        </div>
+        <div className="col-md-6">
+          <h2 className="text-center mb-4">Total Dislike Count</h2>
+          <div className="card text-white bg-danger mb-3">
+            <div className="card-body">
+              <h5 className="card-title">Total Dislikes</h5>
+              <p className="card-text display-1">{totalDislikes}</p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
