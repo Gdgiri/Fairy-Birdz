@@ -43,7 +43,7 @@ const Navbar = () => {
               <li class="nav-item">
                 <Link className="nav-link text-white " to="/home">
                   <span>
-                    <i class="bi bi-house-fill"></i>
+                    <i class="bi bi-book-fill"></i>
                   </span>{" "}
                   Books
                 </Link>
