@@ -14,8 +14,10 @@
 }
 
 .img-container {
-  width: 100%;
-  height: 44%; /* Set a fixed height for the images */
+  width: 60%;
+  height: 50%; /* Set a fixed height for the images */
+  position: relative;
+  left: 80px;
   overflow: hidden; /* Ensure any overflow is hidden */
   display: flex;
   align-items: center;
